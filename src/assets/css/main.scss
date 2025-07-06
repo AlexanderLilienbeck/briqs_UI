@@ -592,7 +592,7 @@ h1,h2,h3,h4,h5 {
           margin-right: 27px;
           height: 39px;
           width: 39px;
-          font-size: 13px;
+          font-size: x-large;
           flex-shrink: 0;
           display: flex;
           border-radius: 10px;
@@ -654,25 +654,27 @@ h1,h2,h3,h4,h5 {
         margin-top: 0;
       }
       h2 {
-        font-size: 36px;
+        font-size: 28px;
         color: var(--color-alpine-white);
         font-weight: 600;
         line-height: 120%;
         margin-bottom: 15px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         @include breakpoint(phone) {
-          font-size: 64px;
-          width: 600px;
+          font-size: 48px;
+          width: 640px;
         }
       }
       h3 {
-        font-size: 18px;
+        font-size: 16px;
         color: var(--color-alpine-white);
         font-weight: 600;
         line-height: 120%;
         margin-bottom: 35px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         @include breakpoint(phone) {
-          font-size: 32px;
-          width: 600px;
+          font-size: 26px;
+          width: 640px;
         }
       }
       .btn-shop {
