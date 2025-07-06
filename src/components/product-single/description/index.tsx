@@ -11,7 +11,7 @@ const Description = ({ show }: ProductDescriptionType) => {
     <section style={style} className="product-single__description">
       <div className="product-description-block">
         <i className="icon-cart" />
-        <h4>Details and product description</h4>
+        <h4>Details</h4>
         <p>
           White Summer Vibes T-shirt in the uiKit line with a colorful print.{" "}
           <br />
@@ -21,7 +21,7 @@ const Description = ({ show }: ProductDescriptionType) => {
       </div>
       <div className="product-description-block">
         <i className="icon-cart" />
-        <h4>Details and product description</h4>
+        <h4>Product Description</h4>
         <p>
           White Summer Vibes T-shirt in the uiKit line with a colorful print.{" "}
           <br />

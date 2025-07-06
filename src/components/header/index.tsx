@@ -62,7 +62,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
         <Link href="/">
           <h1 className="site-logo">
             <Logo />
-            briqs.com
+            briqs
           </h1>
         </Link>
         <nav

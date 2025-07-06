@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="site-footer__top">
           <div className="site-footer__description">
             <h6>
-              <Logo /> briqs.com
+              <Logo /> briqs
             </h6>
             <p>
               B2B Marketplace with AI generated clauses that meet your individual needs.

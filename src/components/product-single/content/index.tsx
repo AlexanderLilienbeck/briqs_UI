@@ -45,9 +45,6 @@ const Content = ({ product }: ProductContent) => {
       name: product.name,
       thumb: product.images ? product.images[0] : "",
       price: product.currentPrice,
-      count,
-      color,
-      size: itemSize,
     };
 
     const productStore = {
@@ -76,34 +73,15 @@ const Content = ({ product }: ProductContent) => {
       </div>
 
       <div className="product-content__filters">
-        <div className="product-filter-item">
-          <h5>Color:</h5>
-          <div className="checkbox-color-wrapper">
-            {productsColors.map((type) => (
-              <CheckboxColor
-                key={type.id}
-                type="radio"
-                name="product-color"
-                color={type.color}
-                valueName={type.label}
-                onChange={onColorSet}
-              />
-            ))}
-          </div>
-        </div>
+ 
         <div className="product-filter-item">
           <h5>
-            Size: <strong>See size table</strong>
+            Options: <strong>This product has no options</strong>
           </h5>
           <div className="checkbox-color-wrapper">
             <div className="select-wrapper">
               <select onChange={onSelectChange}>
-                <option>Choose size</option>
-                {productsSizes.map((type) => (
-                  <option key={type.id} value={type.label}>
-                    {type.label}
-                  </option>
-                ))}
+                <option>Standard</option>
               </select>
             </div>
           </div>
@@ -128,14 +106,6 @@ const Content = ({ product }: ProductContent) => {
                 +
               </button>
             </div>
-
-            <button
-              type="submit"
-              onClick={() => addToCart()}
-              className="btn btn--rounded btn--yellow"
-            >
-              Add to cart
-            </button>
             <button
               type="button"
               onClick={toggleFav}
@@ -143,6 +113,19 @@ const Content = ({ product }: ProductContent) => {
             >
               <i className="icon-heart" />
             </button>
+            </div>
+            <div>
+              <br />
+              <h3>Start dicrect negotiation with that Supplier</h3>
+              <br />
+              <a href="/negotiation">
+                <button
+                className="btn btn--rounded btn--yellow"
+              >
+                Start Negotiation
+              </button>
+            </a>
+
           </div>
         </div>
       </div>
