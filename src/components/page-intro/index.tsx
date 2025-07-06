@@ -15,9 +15,11 @@ const PageIntro = () => {
           >
             <div className="container">
               <div className="page-intro__slide__content">
-                <h2>AI Driven B2B Marketplace</h2>
+                <h2>Turn a Week of Emails</h2>
+                <h2>into a 2-Minute Deal.</h2>
                 <h3 className="">
-                  brick-solid deals, lightning fast
+                  The AI-powered marketplace that negotiates your industrial supply deals for you. 
+                  <br />Brick-solid deals, lightning fast.
                 </h3>
                 
                 {/* Pulsierender Button */}
@@ -66,9 +68,11 @@ const PageIntro = () => {
             >
             <div className="container">
               <div className="page-intro__slide__content">
-                <h2>AI Driven B2B Marketplace</h2>
+                <h2>Turn a Week of Emails</h2>
+                <h2>into a 2-Minute Deal.</h2>                
                 <h3 className="">
-                brick-solid deals, lightning fast
+                  The AI-powered marketplace that negotiates your industrial supply deals for you. 
+                  <br />Brick-solid deals, lightning fast.
                 </h3>
                 
                 {/* Pulsierender Button */}
