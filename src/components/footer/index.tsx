@@ -10,7 +10,7 @@ const Footer = () => {
               <Logo /> briqs
             </h6>
             <p>
-              B2B Marketplace with AI generated clauses that meet your individual needs.
+              AI driven B2B Marketplace that let AI negotiate your deals.
             </p>
             <ul className="site-footer__social-networks">
               <li>
@@ -82,7 +82,7 @@ const Footer = () => {
                 <a href="#">support@mail.info</a>
               </li>
               <li>
-                <a href="#">Phone: +49 176 83162657</a>
+                <a href="#">Phone: +49 123 456789</a>
               </li>
             </ul>
           </div>

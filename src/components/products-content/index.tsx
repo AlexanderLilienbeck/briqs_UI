@@ -9,7 +9,7 @@ const ProductsContent = () => {
     <section className="products-content">
       <div className="products-content__intro">
         <h2>
-          Industrial Products <span>(11)</span>
+          All Products <span>(8)</span>
         </h2>
         <button
           type="button"

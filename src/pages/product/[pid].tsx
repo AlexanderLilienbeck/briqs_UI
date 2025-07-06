@@ -9,14 +9,39 @@ import Gallery from "@/components/product-single/gallery";
 import Reviews from "@/components/product-single/reviews";
 import ProductsFeatured from "@/components/products-featured";
 // types
+import type { UnifiedProduct } from "@/types/dynamic-products";
 import type { ProductType } from "@/types";
 
 import Layout from "../../layouts/Main";
 import { server } from "../../utils/server";
 
 type ProductPageType = {
-  product: ProductType;
+  product: UnifiedProduct;
 };
+
+// Convert UnifiedProduct to legacy ProductType format for compatibility
+function convertToLegacyFormat(product: UnifiedProduct): ProductType {
+  return {
+    id: product.id,
+    name: product.name,
+    thumb: product.images[0] || "",
+    price: product.price.toString(),
+    count: 1,
+    color: "",
+    size: "",
+    images: product.images,
+    discount: (product as any).discount?.toString() || "",
+    currentPrice: (product as any).currentPrice || product.price,
+    punctuation: (product as any).punctuation || {
+      countOpinions: 0,
+      punctuation: 0,
+      votes: []
+    },
+    reviews: (product as any).reviews || [],
+    // Add seller name compatibility
+    sellerName: product.seller_name || "Industrial Supplier"
+  } as ProductType;
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { pid } = query;
@@ -33,6 +58,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const Product = ({ product }: ProductPageType) => {
   const [showBlock, setShowBlock] = useState("description");
 
+  // Convert to legacy format for Gallery and Content components
+  const legacyProduct = convertToLegacyFormat(product);
+
   return (
     <Layout>
       <Breadcrumb />
@@ -41,7 +69,7 @@ const Product = ({ product }: ProductPageType) => {
         <div className="container">
           <div className="product-single__content">
             <Gallery images={product.images} />
-            <Content product={product} />
+            <Content product={legacyProduct} />
           </div>
 
           <div className="product-single__info">
@@ -63,7 +91,7 @@ const Product = ({ product }: ProductPageType) => {
             </div>
 
             <Description show={showBlock === "description"} product={product} />
-            <Reviews product={product} show={showBlock === "reviews"} />
+            <Reviews product={legacyProduct} show={showBlock === "reviews"} />
           </div>
         </div>
       </section>

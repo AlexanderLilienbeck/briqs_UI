@@ -207,7 +207,8 @@ h1,h2,h3,h4,h5 {
   cursor: pointer;
   &.btn--rounded {
     font-size: 12px;
-    background: var(--color-surface);
+    background: var(--color-pergament-white);
+    margin-top: 5px;
     display: inline-block;
     border-radius: 50px;
     padding: 11px 20px;
@@ -760,7 +761,7 @@ h1,h2,h3,h4,h5 {
       z-index: 1;
       height: 100%;
       position: absolute;
-      background: rgba(0,0,0, 0.28);
+      background: var(--color-accent) //rgba(0,0,0, 0.28);
     }
     .featured-item__content {
       margin-top: auto;
