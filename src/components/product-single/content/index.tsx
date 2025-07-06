@@ -76,6 +76,9 @@ const Content = ({ product }: ProductContent) => {
  
         <div className="product-filter-item">
           <h5>
+            Seller: <strong>{product.sellerName}</strong>
+          </h5>
+          <h5>
             Options: <strong>This product has no options</strong>
           </h5>
           <div className="checkbox-color-wrapper">
