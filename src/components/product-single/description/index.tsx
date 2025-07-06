@@ -17,13 +17,17 @@ const Description = ({ show, product }: ProductDescriptionType) => {
   // Get categorized attributes for specifications
   const attributeCategories = getCategorizedAttributes(product);
 
-  // Format value based on type
+  // Format value based on type with consistent formatting
   const formatValue = (value: string | number, format?: string, unit?: string): string => {
     if (format === 'currency') {
-      return `€${typeof value === 'number' ? value.toLocaleString() : value}`;
+      // Use consistent formatting to avoid hydration errors
+      const numValue = typeof value === 'number' ? value : parseFloat(value.toString());
+      // Format as simple decimal without locale-dependent formatting
+      return `€${numValue.toFixed(2)}`;
     }
     if (format === 'number' && typeof value === 'number') {
-      return value.toLocaleString();
+      // Use simple number formatting without locale
+      return value.toString();
     }
     const formattedValue = typeof value === 'number' ? value.toString() : value;
     return unit ? `${formattedValue} ${unit}` : formattedValue;
