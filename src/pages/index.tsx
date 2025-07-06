@@ -19,13 +19,10 @@ const IndexPage = () => {
         <div className="container">
           <article className="featured-item featured-item-large">
             <div className="featured-item__content">
-              <h3>How AI Negotiation Works</h3>
-              <ol style={{ textAlign: "left", marginBottom: "20px" }}>
-                <li>Submit your procurement request via voice or text</li>
-                <li>AI agents instantly match you with qualified suppliers</li>
-                <li>Watch real-time negotiations between AI agents</li>
-                <li>Review and approve final contract terms</li>
-              </ol>
+            <h3>Over time briq learns from you.</h3>
+              <p>
+                Your AI agents will remain within the guardrail of your negotiation playbook. Whenever they are faced with a position that requires to find a more bespoke compromise position it takes your past signed deals and commonly used positions into account.
+              </p>
               <a href="/negotiation" className="btn btn--rounded">
                 Start Your First Negotiation
               </a>
@@ -34,10 +31,9 @@ const IndexPage = () => {
 
           <article className="featured-item featured-item-small-first">
             <div className="featured-item__content">
-              <h3>Voice-Enabled Requests</h3>
+              <h3>Voice First.</h3>
               <p>
-                Describe your needs in German or English - our AI understands
-                complex B2B requirements.
+                Describe your product specs and preferred terms just as you would tell your procurement team.
               </p>
               <a href="/negotiation" className="btn btn--rounded">
                 Try Voice Input
@@ -47,10 +43,9 @@ const IndexPage = () => {
 
           <article className="featured-item featured-item-small">
             <div className="featured-item__content">
-              <h3>24/7 AI Agents</h3>
+              <h3>No disclosure.</h3>
               <p>
-                Never miss a deal - our AI negotiates around the clock across
-                global time zones.
+                Your AI Agent keeps your negoiation strategies and arguments private. Just the closed deal will visible to human.
               </p>
               <a href="/negotiation" className="btn btn--rounded">
                 Get Started
@@ -71,10 +66,10 @@ const IndexPage = () => {
             <li>
               <i className="icon-shipping" />
               <div className="data-item__content">
-                <h4>Autonomous AI Negotiation</h4>
+                <h4>Quickest Deal closing</h4>
                 <p>
-                  Our AI agents handle complex B2B negotiations 24/7, securing
-                  the best terms while you focus on your business operations.
+                  Our AI agents handle complex B2B negotiations 24/7 and super fast, securing
+                  the best terms in less time while you focus on your business operations.
                 </p>
               </div>
             </li>
@@ -82,22 +77,9 @@ const IndexPage = () => {
             <li>
               <i className="icon-payment" />
               <div className="data-item__content">
-                <h4>Real-Time Transparency</h4>
+                <h4>Best deals possible</h4>
                 <p>
-                  Watch negotiations unfold in real-time with complete
-                  visibility into offers, counteroffers, and decision-making
-                  processes.
-                </p>
-              </div>
-            </li>
-
-            <li>
-              <i className="icon-cash" />
-              <div className="data-item__content">
-                <h4>Optimized Commercial Terms</h4>
-                <p>
-                  AI analyzes market data and negotiation patterns to secure
-                  optimal pricing, delivery schedules, and payment terms.
+                  The negotiation agents will finde the best possible deal for you, learning from your previouse activity. But you have the final word to accept or reject that.
                 </p>
               </div>
             </li>
@@ -105,13 +87,23 @@ const IndexPage = () => {
             <li>
               <i className="icon-materials" />
               <div className="data-item__content">
-                <h4>Quality Assurance</h4>
+                <h4>No borders. No limits.</h4>
                 <p>
-                  Verified suppliers with comprehensive certifications and
-                  quality standards ensure reliable B2B partnerships.
+                  Worldwide negotiations, no language or cultural borders anymore. 
                 </p>
               </div>
             </li>
+
+            <li>
+              <i className="icon-cash" />
+              <div className="data-item__content">
+                <h4>Saves time & money.</h4>
+                <p>
+                  You used to spend days with email back and forth, discussing fineprint, just to find the dealbreaker last minute. Let an AI Agent negotiate with your negotiation guidelines and playbook.
+                </p>
+              </div>
+            </li>
+
           </ul>
         </div>
       </section>

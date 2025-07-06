@@ -375,9 +375,9 @@ const NegotiationPage: React.FC = () => {
                       <span className="checkbox-custom">
                         {negotiationData.applyStandardTerms && <span className="checkbox-tick">✓</span>}
                       </span>
-                      <span>Apply your standard terms</span>
+                      <span>Apply your standard negotiation playbook</span>
                     </label>
-                    <button className="adjust-terms-btn">adjust standard terms</button>
+                    <button className="adjust-terms-btn">(adjust)</button>
                   </div>
                   
                   <div className="step-actions">
@@ -387,7 +387,7 @@ const NegotiationPage: React.FC = () => {
                     >
                       Continue without voice
                     </button>
-                    {!voiceState.transcript && (
+{/*                     {!voiceState.transcript && (
                       <button 
                         className="btn btn--rounded btn--yellow"
                         onClick={nextStep}
@@ -395,7 +395,7 @@ const NegotiationPage: React.FC = () => {
                       >
                         Next
                       </button>
-                    )}
+                    )} */}
                     {voiceState.transcript && (
                       <div className="voice-complete-message">
                         <p>✓ Voice recording complete! Proceeding to review...</p>
@@ -438,9 +438,9 @@ const NegotiationPage: React.FC = () => {
                       <span className="checkbox-custom">
                         {negotiationData.applyStandardTerms && <span className="checkbox-tick">✓</span>}
                       </span>
-                      <span>Apply your standard terms</span>
+                      <span>Apply your standard negotiation playbook</span>
                     </label>
-                    <button className="adjust-terms-btn">adjust standard terms</button>
+                    <button className="adjust-terms-btn">(adjust)</button>
                   </div>
                   
                   <div className="step-actions">

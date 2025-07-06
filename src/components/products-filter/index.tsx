@@ -52,35 +52,9 @@ const ProductsFilter = () => {
           </div>
         </div>
 
-        <div className="products-filter__block">
-          <button type="button">Order Quantity</button>
-          <div className="products-filter__block__content checkbox-square-wrapper">
-            {productsSizes.map((type) => (
-              <Checkbox
-                type="square"
-                key={type.id}
-                name="order-quantity"
-                label={type.label}
-              />
-            ))}
-          </div>
-        </div>
 
-        <div className="products-filter__block">
-          <button type="button">Certifications</button>
-          <div className="products-filter__block__content">
-            <div className="checkbox-color-wrapper">
-              {productsColors.map((type) => (
-                <CheckboxColor
-                  key={type.id}
-                  valueName={type.id}
-                  name="product-certifications"
-                  color={type.color}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+
+
 
         <button
           type="submit"
