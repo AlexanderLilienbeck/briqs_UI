@@ -873,8 +873,8 @@ const NegotiationPage: React.FC = () => {
               <button className="btn btn--rounded" onClick={closePlaybookModal}>
                 Close
               </button>
-              <button className="btn btn--rounded btn--yellow" title="Save changes (MVP - not functional)">
-                Save Changes
+              <button disabled className="btn btn--rounded btn--yellow" title="Save changes (MVP - not functional)">
+                Save changes (is not funtional)
               </button>
             </div>
           </div>
