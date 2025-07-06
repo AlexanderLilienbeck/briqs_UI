@@ -1,0 +1,229 @@
+// Procurement Page Styles - Following established design system
+.procurement-intro {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: var(--color-surface);
+  padding: 80px 0;
+  text-align: center;
+
+  &__content {
+    position: relative;
+  }
+
+  &__text {
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+}
+
+.procurement-content {
+  padding: 40px 0 80px;
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-border-light) 100%);
+  min-height: calc(100vh - 200px);
+}
+
+.procurement-header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  h2 {
+    font-size: 2.5rem;
+    color: var(--color-text-primary);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+}
+
+.procurement-description {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.procurement-process {
+  margin-bottom: 50px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &.active {
+    border-color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+
+    .step-number {
+      background: #007bff;
+      color: var(--color-surface);
+    }
+  }
+
+  &-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-right: 15px;
+    color: var(--color-text-secondary);
+  }
+
+  &-content {
+    h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.1rem;
+      color: var(--color-text-primary);
+    }
+
+    p {
+      margin: 0;
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.procurement-form-container {
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+.procurement-benefits {
+  text-align: center;
+
+  h3 {
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    margin-bottom: 30px;
+  }
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.benefit-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h4 {
+    font-size: 1.3rem;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+}
+
+.benefit-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .procurement-intro {
+    padding: 60px 0;
+
+    &__text {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .procurement-header {
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .procurement-description {
+    font-size: 1.1rem;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .procurement-form-container {
+    padding: 20px;
+    margin: 0 -10px 30px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step {
+    padding: 15px;
+
+    &-content h3 {
+      font-size: 1rem;
+    }
+  }
+
+  .benefit-item {
+    padding: 20px 15px;
+  }
+} 

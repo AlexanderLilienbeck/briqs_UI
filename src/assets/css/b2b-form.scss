@@ -1,0 +1,275 @@
+// B2B Request Form Styles - Following established design system
+.b2b-request-form {
+  .form-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 2rem;
+      color: var(--color-text-primary);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .request-form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .form-section {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: var(--color-background);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-light);
+
+    h3 {
+      color: var(--color-text-primary);
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    &.voice-section {
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      border-color: #bbdefb;
+    }
+
+    &.submit-section {
+      background: var(--color-surface);
+      text-align: center;
+      padding: 30px;
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-group {
+    label {
+      display: block;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid var(--color-border-light);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: var(--main-font);
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+
+      &.error {
+        border-color: #dc3545;
+        background-color: #fff5f5;
+      }
+
+      &::placeholder {
+        color: var(--color-text-secondary);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+
+  .error-text {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+  }
+
+  // Voice input specific styles
+  .voice-controls {
+    h3 {
+      color: #4a148c;
+      margin-bottom: 15px;
+    }
+  }
+
+  .voice-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .language-select {
+      padding: 8px 12px;
+      border: 2px solid #9c27b0;
+      border-radius: 6px;
+      background: var(--color-surface);
+      color: #4a148c;
+      font-weight: 500;
+    }
+  }
+
+  .voice-btn {
+    background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
+    color: var(--color-surface);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+    }
+
+    &.listening {
+      background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+      animation: pulse 1.5s infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  .transcript {
+    background: var(--color-surface);
+    padding: 10px;
+    border-radius: 6px;
+    border-left: 4px solid #9c27b0;
+    margin-top: 10px;
+
+    small {
+      color: var(--color-text-secondary);
+      font-style: italic;
+    }
+  }
+
+  // Specifications section
+  .specifications {
+    .spec-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+
+      input {
+        margin-bottom: 0;
+      }
+
+      .remove-spec {
+        background: #dc3545;
+        color: var(--color-surface);
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background: #c82333;
+        }
+      }
+    }
+
+    .add-spec {
+      background: #28a745;
+      color: var(--color-surface);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: #218838;
+      }
+    }
+  }
+
+  // Submit button note
+  .submit-note {
+    margin-top: 15px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  // Validation summary
+  .validation-summary {
+    h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    ul {
+      text-align: left;
+
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    .form-section {
+      padding: 20px 15px;
+    }
+
+    .voice-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .language-select {
+        margin-bottom: 10px;
+      }
+    }
+
+    .specifications .spec-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+
+      .remove-spec {
+        justify-self: start;
+        margin-top: 5px;
+      }
+    }
+  }
+} 

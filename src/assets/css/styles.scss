@@ -1,0 +1,80 @@
+// import icons
+@import './fonts/icons/icons.css';
+
+// import main
+@import './main.scss';
+
+// Industrial Product Styling
+.product__industrial-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #2C5282;
+  
+  p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    
+    strong {
+      color: #2C5282;
+    }
+  }
+}
+
+.specifications-list {
+  .spec-item {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    
+    strong {
+      color: #2C5282;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.certifications-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  
+  .certification-badge {
+    background-color: #2C5282;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+}
+
+.industrial-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  
+  .btn {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+.specifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+  
+  p {
+    margin: 0;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    
+    strong {
+      color: #2C5282;
+    }
+  }
+}

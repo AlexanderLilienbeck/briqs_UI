@@ -1,0 +1,67 @@
+:root {
+  // New Company Color Scheme
+  --color-pergament-white: #FBF5EF;
+  --color-dark-blue: #152934;
+  --color-dark-grey-gunmetal: #273033;
+  --color-alpine-white: #FFFFFF;
+  --color-battleship-grey: #838787;
+  
+  // Primary colors mapped to new scheme
+  --color-primary: #152934;        // Dark blue as primary
+  --color-secondary: #273033;      // Dark grey gunmetal as secondary
+  --color-accent: #152934;         // Dark blue for accent/CTA
+  --color-accent-text: #FFFFFF;    // White text for dark buttons
+  --color-background: #FBF5EF;     // Pergament white as main background
+  --color-surface: #FFFFFF;        // Alpine white for cards/surfaces
+  --color-text-primary: #152934;   // Dark blue for primary text
+  --color-text-secondary: #838787; // Battleship grey for secondary text
+  --color-border: #838787;         // Battleship grey for borders
+  --color-border-light: #FBF5EF;   // Light borders using pergament white
+  
+  // Legacy color mappings (for backward compatibility)
+  --color-orange: #152934;
+  --color-orange-light: #273033;
+  --color-black: #152934;          // Map to dark blue
+  --color-text: #838787;           // Map to battleship grey
+  --color-white: #FFFFFF;
+  --color-gray: #273033;           // Map to dark grey gunmetal
+  --color-red: #FF0000;
+}
+
+@mixin inputPlaceholder() {
+  $selector: '';
+  $prefixes: (
+      moz: "::-moz",
+      webkit: "::-webkit",
+      ie: ":-ms"
+  );
+  @each $prop, $value in $prefixes {
+      @if $prop != "moz" {
+          $selector: #{$value}-input-placeholder;
+      } @else {
+          $selector: #{$value}-placeholder;
+      }
+      @if & {
+          &#{$selector} {
+              @content;
+          }
+      } @else {
+          #{$selector} {
+              @content;
+          }
+      }
+  }
+  &::placeholder {
+    @content;
+  }
+}
+
+
+@keyframes skeleton {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
