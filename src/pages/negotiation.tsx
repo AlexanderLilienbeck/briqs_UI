@@ -15,6 +15,59 @@ import {
   NegotiationDeal
 } from "@/types/negotiation";
 
+// Standard Playbook Interface
+interface StandardPlaybook {
+  tradables: {
+    primaryGoal: string;
+    get: string[];
+    give: string[];
+  };
+  paymentTerms: {
+    ideal: string;
+    fallbackPosition: string;
+  };
+  warranty: {
+    ideal: string;
+    fallbackPosition: string;
+  };
+  delivery: {
+    ideal: string;
+    fallbackPosition: string;
+  };
+}
+
+// Mock Standard Playbook Data
+const mockStandardPlaybook: StandardPlaybook = {
+  tradables: {
+    primaryGoal: "Achieve the lowest possible Total Cost of Ownership (TCO). The sticker price is important, but favorable terms, an extended warranty, and included service are equally critical for minimizing long-term expenses.",
+    get: [
+      "A significant discount off the list price.",
+      "A comprehensive, multi-year warranty (especially on powertrain and hydraulics).",
+      "The first 2-3 scheduled maintenance services included (parts and labor).",
+      "Favorable payment terms (e.g., Net 60 or Net 90) to improve cash flow.",
+      "Free delivery to our primary worksite."
+    ],
+    give: [
+      "A public, positive customer testimonial or case study.",
+      "A commitment to a future parts & service contract (if the rates are competitive).",
+      "Flexibility on the delivery date (if our project schedule allows).",
+      "A slightly larger-than-standard down payment in exchange for a major price discount or extended warranty."
+    ]
+  },
+  paymentTerms: {
+    ideal: "Net 60 terms with 0% down payment required.",
+    fallbackPosition: "Net 30 terms with no more than a 5% down payment required to secure the machine."
+  },
+  warranty: {
+    ideal: "3-year / 3,000-hour comprehensive warranty. First two scheduled services (250hr, 500hr) fully included.",
+    fallbackPosition: "Minimum 2-year / 2,000-hour powertrain warranty. First scheduled service included (labor only)."
+  },
+  delivery: {
+    ideal: "Free delivery to our site",
+    fallbackPosition: "Delivery cost capped at a pre-agreed, reasonable flat fee."
+  }
+};
+
 const NegotiationPage: React.FC = () => {
   const router = useRouter();
   
@@ -49,6 +102,9 @@ const NegotiationPage: React.FC = () => {
   // Loading states
   const [isNegotiating, setIsNegotiating] = useState(false);
   const [editingRequirement, setEditingRequirement] = useState<string | null>(null);
+  
+  // Modal state
+  const [showPlaybookModal, setShowPlaybookModal] = useState(false);
 
   // Voice recording functions
   const startVoiceRecording = async () => {
@@ -261,6 +317,15 @@ const NegotiationPage: React.FC = () => {
     }
   };
 
+  // Modal handlers
+  const openPlaybookModal = () => {
+    setShowPlaybookModal(true);
+  };
+
+  const closePlaybookModal = () => {
+    setShowPlaybookModal(false);
+  };
+
   return (
     <Layout>
       <Breadcrumb />
@@ -377,7 +442,7 @@ const NegotiationPage: React.FC = () => {
                       </span>
                       <span>Apply your standard negotiation playbook</span>
                     </label>
-                    <button className="adjust-terms-btn">(adjust)</button>
+                    <button className="adjust-terms-btn" onClick={openPlaybookModal}>(adjust)</button>
                   </div>
                   
                   <div className="step-actions">
@@ -387,15 +452,7 @@ const NegotiationPage: React.FC = () => {
                     >
                       Continue without voice
                     </button>
-{/*                     {!voiceState.transcript && (
-                      <button 
-                        className="btn btn--rounded btn--yellow"
-                        onClick={nextStep}
-                        disabled={true}
-                      >
-                        Next
-                      </button>
-                    )} */}
+
                     {voiceState.transcript && (
                       <div className="voice-complete-message">
                         <p>✓ Voice recording complete! Proceeding to review...</p>
@@ -440,7 +497,7 @@ const NegotiationPage: React.FC = () => {
                       </span>
                       <span>Apply your standard negotiation playbook</span>
                     </label>
-                    <button className="adjust-terms-btn">(adjust)</button>
+                    <button className="adjust-terms-btn" onClick={openPlaybookModal}>(adjust)</button>
                   </div>
                   
                   <div className="step-actions">
@@ -709,6 +766,120 @@ const NegotiationPage: React.FC = () => {
           
         </div>
       </section>
+      
+      {/* Standard Playbook Modal */}
+      {showPlaybookModal && (
+        <div className="modal-overlay" onClick={closePlaybookModal}>
+          <div className="modal-content playbook-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Standard Negotiation Playbook</h2>
+              <button className="modal-close" onClick={closePlaybookModal}>×</button>
+            </div>
+            
+            <div className="modal-body">
+              <div className="playbook-section">
+                <h3>Primary Goal</h3>
+                <p className="playbook-goal">{mockStandardPlaybook.tradables.primaryGoal}</p>
+              </div>
+              
+              <div className="playbook-section">
+                <h3>What We Want to Get (High Value to Us)</h3>
+                <ul className="playbook-list get-list">
+                  {mockStandardPlaybook.tradables.get.map((item, index) => (
+                    <li key={index}>
+                      <span className="list-icon">✓</span>
+                      <span>{item}</span>
+                      <button className="edit-item-btn" title="Edit item (MVP - not functional)">
+                        <i className="icon-edit"></i>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="playbook-section">
+                <h3>What We Can Give (Low Cost to Us)</h3>
+                <ul className="playbook-list give-list">
+                  {mockStandardPlaybook.tradables.give.map((item, index) => (
+                    <li key={index}>
+                      <span className="list-icon">→</span>
+                      <span>{item}</span>
+                      <button className="edit-item-btn" title="Edit item (MVP - not functional)">
+                        <i className="icon-edit"></i>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="playbook-terms">
+                <div className="term-section">
+                  <h3>Payment Terms</h3>
+                  <div className="term-item">
+                    <span className="term-label">Ideal:</span>
+                    <span className="term-value">{mockStandardPlaybook.paymentTerms.ideal}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                  <div className="term-item">
+                    <span className="term-label">Fallback:</span>
+                    <span className="term-value">{mockStandardPlaybook.paymentTerms.fallbackPosition}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="term-section">
+                  <h3>Warranty</h3>
+                  <div className="term-item">
+                    <span className="term-label">Ideal:</span>
+                    <span className="term-value">{mockStandardPlaybook.warranty.ideal}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                  <div className="term-item">
+                    <span className="term-label">Fallback:</span>
+                    <span className="term-value">{mockStandardPlaybook.warranty.fallbackPosition}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="term-section">
+                  <h3>Delivery</h3>
+                  <div className="term-item">
+                    <span className="term-label">Ideal:</span>
+                    <span className="term-value">{mockStandardPlaybook.delivery.ideal}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                  <div className="term-item">
+                    <span className="term-label">Fallback:</span>
+                    <span className="term-value">{mockStandardPlaybook.delivery.fallbackPosition}</span>
+                    <button className="edit-item-btn" title="Edit term (MVP - not functional)">
+                      <i className="icon-edit"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="modal-footer">
+              <button className="btn btn--rounded" onClick={closePlaybookModal}>
+                Close
+              </button>
+              <button className="btn btn--rounded btn--yellow" title="Save changes (MVP - not functional)">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       
       <Footer />
     </Layout>

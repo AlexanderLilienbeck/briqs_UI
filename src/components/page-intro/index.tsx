@@ -15,9 +15,9 @@ const PageIntro = () => {
           >
             <div className="container">
               <div className="page-intro__slide__content">
-                <h2>AI Driven B2B Marketplace</h2>
+                <h2>Turn a Week of Emails into a 2-Minute Deal.</h2>
                 <h3 className="">
-                  brick-solid deals, lightning fast
+                  BRIQS is the AI-powered marketplace that negotiates your industrial supply deals for you. Brick-solid deals, lightning fast.
                 </h3>
                 
                 {/* Pulsierender Button */}
@@ -66,9 +66,9 @@ const PageIntro = () => {
             >
             <div className="container">
               <div className="page-intro__slide__content">
-                <h2>AI Driven B2B Marketplace</h2>
+                <h2> </h2>
                 <h3 className="">
-                brick-solid deals, lightning fast
+                 
                 </h3>
                 
                 {/* Pulsierender Button */}
