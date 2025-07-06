@@ -24,4 +24,5 @@ const ProductsFeatured = () => {
   );
 };
 
+
 export default ProductsFeatured;
