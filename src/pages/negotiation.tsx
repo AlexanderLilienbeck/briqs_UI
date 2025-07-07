@@ -288,6 +288,9 @@ const NegotiationPage: React.FC = () => {
           mediaRecorder: undefined
         }));
         
+        // Set playbook loading when transitioning to step 3
+        setIsPlaybookLoading(true);
+        
         try {
           // Use API transcription instead of browser speech recognition
           const result = await transcribeAudio(audioBlob);
@@ -307,6 +310,9 @@ const NegotiationPage: React.FC = () => {
             playbookData: playbookData
           }));
           
+          // Clear playbook loading when data is ready
+          setIsPlaybookLoading(false);
+          
           // Auto-advance to step 3 after successful transcription
           setTimeout(() => {
             if (negotiationData.step === 1) {
@@ -320,6 +326,9 @@ const NegotiationPage: React.FC = () => {
             isProcessing: false,
             error: error instanceof Error ? error.message : 'Transcription failed'
           }));
+          
+          // Clear playbook loading on error
+          setIsPlaybookLoading(false);
         }
         
         // Clean up stream
@@ -346,7 +355,8 @@ const NegotiationPage: React.FC = () => {
   const stopVoiceRecording = () => {
     if (voiceState.mediaRecorder && voiceState.mediaRecorder.state === 'recording') {
       voiceState.mediaRecorder.stop();
-      // Auto-advance directly to step 3 after voice recording
+      // Set loading state and auto-advance directly to step 3 after voice recording
+      setIsPlaybookLoading(true);
       setTimeout(() => {
         if (negotiationData.step === 1) {
           setNegotiationData(prev => ({ ...prev, step: 3 }));
@@ -718,7 +728,11 @@ const NegotiationPage: React.FC = () => {
             <div className="negotiation-step requirements-review-step">
               <div className="step-content">
                 <h2>Negotiation Playbook</h2>
-                <p>This is an overview of the product specs you are lookig for and the combined negotiation playbook from your input and your profile data.</p>
+                {isPlaybookLoading ? (
+                  <p>Analyzing your request and building negotiation strategy...</p>
+                ) : (
+                  <p>This is an overview of the product specs you are lookig for and the combined negotiation playbook from your input and your profile data.</p>
+                )}
                 
                 {/* MVP Notice for text input */}
                 {negotiationData.textInput && !negotiationData.voiceInput && (
@@ -734,20 +748,63 @@ const NegotiationPage: React.FC = () => {
                 <div className="original-input-section">
                   <h3>Original Request</h3>
                   <div className="original-input-display">
-                    <p>
-                      {negotiationData.voiceInput || negotiationData.textInput || "No input provided"}
-                    </p>
-                    {negotiationData.voiceInput && (
-                      <span className="input-source voice-source">📼 Voice Input</span>
-                    )}
-                    {negotiationData.textInput && !negotiationData.voiceInput && (
-                      <span className="input-source text-source">✏️ Text Input</span>
+                    {isPlaybookLoading ? (
+                      <div className="skeleton-loading">
+                        <div className="skeleton-line skeleton-line-long"></div>
+                        <div className="skeleton-line skeleton-line-medium"></div>
+                        <div className="skeleton-line skeleton-line-short"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p>
+                          {negotiationData.voiceInput || negotiationData.textInput || "No input provided"}
+                        </p>
+                        {negotiationData.voiceInput && (
+                          <span className="input-source voice-source">📼 Voice Input</span>
+                        )}
+                        {negotiationData.textInput && !negotiationData.voiceInput && (
+                          <span className="input-source text-source">✏️ Text Input</span>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
 
                 {/* Playbook Analysis */}
-                {negotiationData.playbookData && (
+                {isPlaybookLoading ? (
+                  <div className="playbook-skeleton">
+                    <div className="skeleton-section">
+                      <div className="skeleton-header">
+                        <div className="skeleton-line skeleton-line-medium"></div>
+                        <div className="skeleton-buttons">
+                          <div className="skeleton-button"></div>
+                          <div className="skeleton-button"></div>
+                        </div>
+                      </div>
+                      <div className="skeleton-content">
+                        <div className="skeleton-line skeleton-line-long"></div>
+                        <div className="skeleton-line skeleton-line-medium"></div>
+                        <div className="skeleton-line skeleton-line-short"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="skeleton-section">
+                      <div className="skeleton-header">
+                        <div className="skeleton-line skeleton-line-medium"></div>
+                        <div className="skeleton-buttons">
+                          <div className="skeleton-button"></div>
+                          <div className="skeleton-button"></div>
+                        </div>
+                      </div>
+                      <div className="skeleton-content">
+                        <div className="skeleton-line skeleton-line-long"></div>
+                        <div className="skeleton-line skeleton-line-medium"></div>
+                        <div className="skeleton-line skeleton-line-long"></div>
+                        <div className="skeleton-line skeleton-line-short"></div>
+                      </div>
+                    </div>
+                  </div>
+                ) : negotiationData.playbookData && (
                   <div className="playbook-analysis">
                     {/* Product Overview */}
                     <div className="analysis-section product-overview">
@@ -850,14 +907,16 @@ const NegotiationPage: React.FC = () => {
                   <button 
                     className="btn btn--rounded"
                     onClick={() => goToStep(voiceState.transcript ? 1 : 2)}
+                    disabled={isPlaybookLoading}
                   >
                     Back
                   </button>
                   <button 
                     className="btn btn--rounded btn--yellow"
                     onClick={startNegotiation}
+                    disabled={isPlaybookLoading}
                   >
-                    Let AI Agent Negotiate
+                    {isPlaybookLoading ? 'Processing...' : 'Let AI Agent Negotiate'}
                   </button>
                 </div>
               </div>
