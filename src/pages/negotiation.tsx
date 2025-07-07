@@ -916,10 +916,10 @@ const NegotiationPage: React.FC = () => {
                           {negotiationData.voiceInput || negotiationData.textInput || "No input provided"}
                         </p>
                         {negotiationData.voiceInput && (
-                          <span className="input-source voice-source">📼 Voice Input</span>
+                          <span className="input-source voice-source">Voice Input</span>
                         )}
                         {negotiationData.textInput && !negotiationData.voiceInput && (
-                          <span className="input-source text-source">✏️ Text Input</span>
+                          <span className="input-source text-source">Text Input</span>
                         )}
                       </>
                     )}
