@@ -1,100 +1,102 @@
 // Combined Products Data - Industrial Products
 // Showcases our 20 target industrial products in the standard format
 
+import { getRandomProductImages } from '@/types/api-products';
+
 // Industrial Products in standard format - showcasing our 20 target products
 const industrialProducts = [
-  // Product 1: Cold-Rolled Steel Coil SPCC 1.0mm
+  // Product 1: Hydraulic Excavator
   {
     id: "ind-001",
-    name: "Cold-Rolled Steel Coil SPCC 1.0mm",
-    price: 750.00,
-    currentPrice: 750.00,
+    name: "Caterpillar 320D Hydraulic Excavator",
+    price: 185000,
+    currentPrice: 185000,
     discount: 0,
-    quantityAvailable: 5,
-    category: "Raw Materials",
+    quantityAvailable: 1,
+    category: "Heavy Machinery",
     sizes: [],
-    colors: ["#2C5282"],
-    images: ["/images/products/product-1.jpg"],
+    colors: ["#152934"],
+    images: getRandomProductImages('excavator'),
     punctuation: {
       countOpinions: 12,
-      punctuation: 4.5,
-      votes: [
-        { value: 1, count: 0 },
-        { value: 2, count: 1 },
-        { value: 3, count: 1 },
-        { value: 4, count: 4 },
-        { value: 5, count: 6 },
-      ],
-    },
-    reviews: [
-      {
-        name: "Manufacturing Manager",
-        avatar: "/images/featured-1.jpg",
-        description: "<p>High-quality cold-rolled steel with excellent surface finish. Perfect for our automotive parts manufacturing. Consistent thickness and coating options available.</p>",
-        punctuation: 5,
-      },
-    ],
-    industrial: {
-      sku: "SPCC-CR-1.0MM",
-      category: "Raw Materials",
-      subcategory: "Steel Products",
-      specifications: {
-        "Material Grade": "SPCC (Commercial)",
-        "Thickness": "1.0mm ±0.05mm",
-        "Width": "1000-1500mm",
-        "Coil Weight": "5-25 tons"
-      },
-      certifications: ["ISO 9001:2015", "JIS G 3141"],
-      leadTime: "14-21 days",
-      minimumOrder: 5,
-      currency: "EUR"
-    }
-  },
-
-  // Product 2: Aluminum 6061-T6 Extrusion Profiles
-  {
-    id: "ind-002",
-    name: "Aluminum 6061-T6 Extrusion Profiles",
-    price: 3.85,
-    currentPrice: 3.85,
-    discount: 0,
-    quantityAvailable: 100,
-    category: "Raw Materials",
-    sizes: [],
-    colors: ["#C0C0C0"],
-    images: ["/images/products/product-2.jpg"],
-    punctuation: {
-      countOpinions: 18,
       punctuation: 4.7,
       votes: [
         { value: 1, count: 0 },
         { value: 2, count: 0 },
-        { value: 3, count: 2 },
-        { value: 4, count: 4 },
-        { value: 5, count: 12 },
+        { value: 3, count: 1 },
+        { value: 4, count: 3 },
+        { value: 5, count: 8 },
       ],
     },
     reviews: [
       {
-        name: "Design Engineer",
+        name: "Construction Manager",
         avatar: "/images/featured-1.jpg",
-        description: "<p>Excellent aluminum profiles with precise dimensions. T6 temper provides perfect strength-to-weight ratio for our architectural projects. Cut-to-length service is very convenient.</p>",
+        description: "<p>Excellent hydraulic excavator with outstanding performance and reliability. The operating weight and lifting capacity exceeded our expectations for this model year.</p>",
         punctuation: 5,
       },
     ],
     industrial: {
-      sku: "AL6061-T6-PROFILE",
-      category: "Raw Materials",
-      subcategory: "Aluminum Products",
+      sku: "CAT-320D-2022",
+      category: "Heavy Machinery",
+      subcategory: "Excavators",
+      specifications: {
+        "Brand": "Caterpillar",
+        "Model": "320D",
+        "Year": "2022",
+        "Condition": "Used - Excellent"
+      },
+      certifications: ["CE Marking", "ISO 9001"],
+      leadTime: "7-14 days",
+      minimumOrder: 1,
+      currency: "USD"
+    }
+  },
+
+  // Product 2: Aluminum Sheet 6061-T6
+  {
+    id: "ind-002", 
+    name: "Aluminum Sheet 6061-T6 Marine Grade",
+    price: 125,
+    currentPrice: 125,
+    discount: 0,
+    quantityAvailable: 200,
+    category: "Raw Materials",
+    sizes: [],
+    colors: ["#C0C0C0"],
+    images: getRandomProductImages('aluminum_sheet'),
+    punctuation: {
+      countOpinions: 28,
+      punctuation: 4.4,
+      votes: [
+        { value: 1, count: 0 },
+        { value: 2, count: 1 },
+        { value: 3, count: 2 },
+        { value: 4, count: 12 },
+        { value: 5, count: 13 },
+      ],
+    },
+    reviews: [
+      {
+        name: "Marine Engineer",
+        avatar: "/images/featured-1.jpg",
+        description: "<p>High-quality marine grade aluminum with excellent corrosion resistance. Perfect thickness and surface finish for our marine applications.</p>",
+        punctuation: 4,
+      },
+    ],
+    industrial: {
+      sku: "AL6061-T6-3MM",
+      category: "Raw Materials", 
+      subcategory: "Aluminum Sheets",
       specifications: {
         "Alloy": "6061-T6",
-        "Temper": "T6 (solution treated and aged)",
-        "Length": "6000mm standard (cut-to-length available)",
-        "Surface Finish": "Mill finish or anodized"
+        "Thickness": "3.0mm",
+        "Dimensions": "1200mm x 2400mm",
+        "Surface": "Mill Finish"
       },
-      certifications: ["EN 755-2", "ASTM B221"],
-      leadTime: "7-14 days",
-      minimumOrder: 100,
+      certifications: ["EN AW-6061", "ASTM B209"],
+      leadTime: "5-10 days",
+      minimumOrder: 10,
       currency: "EUR"
     }
   },

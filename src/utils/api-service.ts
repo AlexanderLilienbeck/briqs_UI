@@ -9,6 +9,42 @@ import { FeaturedProductsResponse, UnifiedProduct, transformAPIResponse } from '
 const EXTERNAL_API_BASE_URL = 'http://localhost:8000';
 const BUYER_ID = 1; // MVP: Always use buyer_id=1
 
+// Import the image utility function
+const getRandomProductImages = (productType?: 'excavator' | 'aluminum_sheet'): string[] => {
+  let availableImages: string[] = [];
+  
+  if (productType === 'excavator') {
+    availableImages = [
+      "/images/products/excevator/product-01.jpg",
+      "/images/products/excevator/product-04.jpg", 
+      "/images/products/excevator/product-013.jpg",
+      "/images/products/excevator/construction-equipment-product-02.jpg"
+    ];
+  } else if (productType === 'aluminum_sheet') {
+    availableImages = [
+      "/images/products/aluminium/product-01.jpg",
+      "/images/products/aluminium/product-02.jpg",
+      "/images/products/aluminium/product-03.jpg",
+      "/images/products/aluminium/product-04.jpg",
+      "/images/products/aluminium/product-05.jpg"
+    ];
+  } else {
+    availableImages = [
+      "/images/products/product-1.jpg",
+      "/images/products/product-2.jpg",
+      "/images/products/product-3.jpg",
+      "/images/products/product-4.jpg",
+      "/images/products/product-5.jpg",
+      "/images/products/product-6.jpg",
+      "/images/products/product-7.jpg"
+    ];
+  }
+  
+  const numImages = Math.floor(Math.random() * 3) + 1;
+  const shuffledImages = [...availableImages].sort(() => Math.random() - 0.5);
+  return shuffledImages.slice(0, numImages);
+};
+
 // API service class
 export class ExternalAPIService {
   private static instance: ExternalAPIService;
@@ -90,56 +126,35 @@ export class ExternalAPIService {
 
   // Fallback products when API is unavailable
   private getFallbackProducts(): UnifiedProduct[] {
-    console.log('Using fallback products due to API unavailability');
-    
     return [
-      // Fallback excavators
       {
         id: 'fallback-exc-001',
-        name: 'Caterpillar 320 (Fallback)',
-        seller_name: 'Demo Seller',
+        name: 'Caterpillar 320D Hydraulic Excavator (Fallback)',
+        seller_name: 'Demo Equipment',
+        price: 85000.0,
         brand: 'Caterpillar',
-        model: '320',
-        year: 2022,
-        price: 180000,
-        condition: 'Used',
+        model: '320D',
+        year: 2018,
+        condition: 'Used - Good',
         lifting_capacity_tons: 20.5,
         operating_weight_tons: 20.8,
         max_digging_depth_m: 6.5,
         bucket_capacity_m3: 1.2,
         seller_playbook: 'fallback_playbook.json',
         productType: 'excavator',
-        images: ['/images/products/product-1.jpg', '/images/products/product-2.jpg']
+        images: getRandomProductImages('excavator')
       },
-      {
-        id: 'fallback-exc-002',
-        name: 'Komatsu PC200 (Fallback)',
-        seller_name: 'Demo Seller',
-        brand: 'Komatsu',
-        model: 'PC200',
-        year: 2021,
-        price: 165000,
-        condition: 'Used',
-        lifting_capacity_tons: 19.8,
-        operating_weight_tons: 19.5,
-        max_digging_depth_m: 6.2,
-        bucket_capacity_m3: 1.1,
-        seller_playbook: 'fallback_playbook.json',
-        productType: 'excavator',
-        images: ['/images/products/product-3.jpg', '/images/products/product-4.jpg']
-      },
-      // Fallback aluminum sheets
       {
         id: 'fallback-alu-001',
-        name: 'Aluminum Sheet 1100-H14 (Fallback)',
-        seller_name: 'Demo Supplier',
-        price: 75.0,
+        name: 'Aluminum Sheet 6061-T6 (Fallback)',
+        seller_name: 'Demo Materials',
+        price: 95.0,
         availability: 50,
-        thickness_mm: 1.0,
-        total_weight_kg: 10.0,
+        thickness_mm: 1.5,
+        total_weight_kg: 15.0,
         seller_playbook: 'fallback_playbook.json',
         productType: 'aluminum_sheet',
-        images: ['/images/products/product-5.jpg', '/images/products/product-6.jpg']
+        images: getRandomProductImages('aluminum_sheet')
       },
       {
         id: 'fallback-alu-002',
@@ -151,7 +166,7 @@ export class ExternalAPIService {
         total_weight_kg: 20.0,
         seller_playbook: 'fallback_playbook.json',
         productType: 'aluminum_sheet',
-        images: ['/images/products/product-7.jpg', '/images/products/product-1.jpg']
+        images: getRandomProductImages('aluminum_sheet')
       }
     ];
   }

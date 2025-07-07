@@ -76,7 +76,7 @@ export function transformAPIResponse(apiResponse: FeaturedProductsResponse): Uni
     products.push({
       ...excavator,
       productType: 'excavator',
-      images: getRandomProductImages()
+      images: getRandomProductImages('excavator')
     });
   });
   
@@ -85,7 +85,7 @@ export function transformAPIResponse(apiResponse: FeaturedProductsResponse): Uni
     products.push({
       ...sheet,
       productType: 'aluminum_sheet',
-      images: getRandomProductImages()
+      images: getRandomProductImages('aluminum_sheet')
     });
   });
   
@@ -93,27 +93,44 @@ export function transformAPIResponse(apiResponse: FeaturedProductsResponse): Uni
 }
 
 // Random image assignment utility
-function getRandomProductImages(): string[] {
-  const availableImages = [
-    "/images/products/product-1.jpg",
-    "/images/products/product-2.jpg",
-    "/images/products/product-3.jpg",
-    "/images/products/product-4.jpg",
-    "/images/products/product-5.jpg",
-    "/images/products/product-6.jpg",
-    "/images/products/product-7.jpg"
-  ];
+export function getRandomProductImages(productType?: 'excavator' | 'aluminum_sheet'): string[] {
+  let availableImages: string[] = [];
+  
+  if (productType === 'excavator') {
+    availableImages = [
+      "/images/products/excevator/product-01.jpg",
+      "/images/products/excevator/product-04.jpg", 
+      "/images/products/excevator/product-013.jpg",
+      "/images/products/excevator/construction-equipment-product-02.jpg"
+    ];
+  } else if (productType === 'aluminum_sheet') {
+    availableImages = [
+      "/images/products/aluminium/product-01.jpg",
+      "/images/products/aluminium/product-02.jpg",
+      "/images/products/aluminium/product-03.jpg",
+      "/images/products/aluminium/product-04.jpg",
+      "/images/products/aluminium/product-05.jpg"
+    ];
+  } else {
+    // Fallback to generic product images
+    availableImages = [
+      "/images/products/product-1.jpg",
+      "/images/products/product-2.jpg",
+      "/images/products/product-3.jpg",
+      "/images/products/product-4.jpg",
+      "/images/products/product-5.jpg",
+      "/images/products/product-6.jpg",
+      "/images/products/product-7.jpg"
+    ];
+  }
   
   // Return 1-3 random images
   const numImages = Math.floor(Math.random() * 3) + 1;
   const selectedImages: string[] = [];
+  const shuffledImages = [...availableImages].sort(() => Math.random() - 0.5);
   
-  for (let i = 0; i < numImages; i++) {
-    const randomIndex = Math.floor(Math.random() * availableImages.length);
-    const image = availableImages[randomIndex];
-    if (!selectedImages.includes(image)) {
-      selectedImages.push(image);
-    }
+  for (let i = 0; i < Math.min(numImages, shuffledImages.length); i++) {
+    selectedImages.push(shuffledImages[i]);
   }
   
   return selectedImages.length > 0 ? selectedImages : [availableImages[0]];

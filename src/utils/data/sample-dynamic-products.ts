@@ -1,17 +1,14 @@
 import { Excavator, AluminumSheet, B2CProduct, UnifiedProduct } from '../../types/dynamic-products';
+import { getRandomProductImages } from '../../types/api-products';
 
 // Sample Excavator Products
 export const sampleExcavators: Excavator[] = [
   {
     id: "exc-001",
     name: "Caterpillar 320D2 Hydraulic Excavator",
-    seller_name: "Heavy Equipment Solutions GmbH",
-    price: 85000,
-    images: [
-      "/images/products/excavator-cat-320d2-1.jpg",
-      "/images/products/excavator-cat-320d2-2.jpg",
-      "/images/products/excavator-cat-320d2-3.jpg"
-    ],
+    seller_name: "Heavy Equipment Solutions",
+    price: 180000,
+    images: getRandomProductImages('excavator'),
     productType: "excavator",
     category: "Heavy Machinery",
     subcategory: "Excavators",
@@ -19,22 +16,19 @@ export const sampleExcavators: Excavator[] = [
     keywords: ["excavator", "caterpillar", "construction", "hydraulic", "earthmoving"],
     brand: "Caterpillar",
     model: "320D2",
-    year: 2018,
-    condition: "Used - Good",
+    year: 2022,
+    condition: "Used - Excellent",
     lifting_capacity_tons: 20.5,
-    operating_weight_tons: 21.8,
-    max_digging_depth_m: 6.7,
+    operating_weight_tons: 20.8,
+    max_digging_depth_m: 6.5,
     bucket_capacity_m3: 1.2
   },
   {
     id: "exc-002",
     name: "Komatsu PC210LC-10 Excavator",
-    seller_name: "Industrial Machinery Europe",
-    price: 95000,
-    images: [
-      "/images/products/excavator-komatsu-pc210-1.jpg",
-      "/images/products/excavator-komatsu-pc210-2.jpg"
-    ],
+    seller_name: "Construction Equipment Direct",
+    price: 165000,
+    images: getRandomProductImages('excavator'),
     productType: "excavator",
     category: "Heavy Machinery",
     subcategory: "Excavators",
@@ -42,23 +36,19 @@ export const sampleExcavators: Excavator[] = [
     keywords: ["excavator", "komatsu", "hydraulic", "construction", "mining"],
     brand: "Komatsu",
     model: "PC210LC-10",
-    year: 2020,
-    condition: "Used - Excellent",
-    lifting_capacity_tons: 18.2,
-    operating_weight_tons: 20.9,
-    max_digging_depth_m: 6.5,
-    bucket_capacity_m3: 1.0
+    year: 2021,
+    condition: "Used - Good",
+    lifting_capacity_tons: 19.8,
+    operating_weight_tons: 21.2,
+    max_digging_depth_m: 6.7,
+    bucket_capacity_m3: 1.18
   },
   {
     id: "exc-003",
     name: "Volvo EC220E Crawler Excavator",
-    seller_name: "Nordic Construction Equipment",
-    price: 78000,
-    images: [
-      "/images/products/excavator-volvo-ec220-1.jpg",
-      "/images/products/excavator-volvo-ec220-2.jpg",
-      "/images/products/excavator-volvo-ec220-3.jpg"
-    ],
+    seller_name: "Nordic Machinery",
+    price: 195000,
+    images: getRandomProductImages('excavator'),
     productType: "excavator",
     category: "Heavy Machinery",
     subcategory: "Excavators",
@@ -66,12 +56,12 @@ export const sampleExcavators: Excavator[] = [
     keywords: ["excavator", "volvo", "crawler", "fuel-efficient", "construction"],
     brand: "Volvo",
     model: "EC220E",
-    year: 2019,
-    condition: "Used - Very Good",
-    lifting_capacity_tons: 19.8,
-    operating_weight_tons: 22.1,
+    year: 2023,
+    condition: "New",
+    lifting_capacity_tons: 21.0,
+    operating_weight_tons: 22.3,
     max_digging_depth_m: 6.8,
-    bucket_capacity_m3: 1.1
+    bucket_capacity_m3: 1.25
   }
 ];
 
@@ -80,56 +70,47 @@ export const sampleAluminumSheets: AluminumSheet[] = [
   {
     id: "alu-001",
     name: "6061-T6 Aluminum Sheet - 3mm Thickness",
-    seller_name: "European Metal Supply Co.",
-    price: 1250,
-    images: [
-      "/images/products/aluminum-sheet-6061-1.jpg",
-      "/images/products/aluminum-sheet-6061-2.jpg"
-    ],
+    seller_name: "Industrial Metals Supply",
+    price: 125.50,
+    images: getRandomProductImages('aluminum_sheet'),
     productType: "aluminum_sheet",
     category: "Raw Materials",
-    subcategory: "Metal Sheets",
+    subcategory: "Aluminum Sheets",
     description: "High-grade 6061-T6 aluminum sheet suitable for aerospace and automotive applications",
     keywords: ["aluminum", "6061-T6", "sheet", "aerospace", "automotive", "metal"],
-    availability: 50,
+    availability: 100,
     thickness_mm: 3.0,
-    total_weight_kg: 125.5
+    total_weight_kg: 22.5
   },
   {
     id: "alu-002",
     name: "5052-H32 Marine Grade Aluminum Sheet",
-    seller_name: "Maritime Materials Ltd.",
-    price: 980,
-    images: [
-      "/images/products/aluminum-sheet-5052-1.jpg",
-      "/images/products/aluminum-sheet-5052-2.jpg",
-      "/images/products/aluminum-sheet-5052-3.jpg"
-    ],
+    seller_name: "Marine Materials Corp",
+    price: 98.75,
+    images: getRandomProductImages('aluminum_sheet'),
     productType: "aluminum_sheet",
     category: "Raw Materials",
-    subcategory: "Metal Sheets",
+    subcategory: "Aluminum Sheets",
     description: "Corrosion-resistant marine grade aluminum sheet perfect for boat building and marine applications",
     keywords: ["aluminum", "5052-H32", "marine", "corrosion-resistant", "boat", "sheet"],
     availability: 75,
     thickness_mm: 2.5,
-    total_weight_kg: 98.2
+    total_weight_kg: 18.8
   },
   {
     id: "alu-003",
     name: "1100-O Pure Aluminum Sheet - Ultra Thin",
-    seller_name: "Precision Metal Works",
-    price: 750,
-    images: [
-      "/images/products/aluminum-sheet-1100-1.jpg"
-    ],
+    seller_name: "Precision Alloys Ltd",
+    price: 65.25,
+    images: getRandomProductImages('aluminum_sheet'),
     productType: "aluminum_sheet",
     category: "Raw Materials",
-    subcategory: "Metal Sheets",
+    subcategory: "Aluminum Sheets",
     description: "Ultra-thin pure aluminum sheet ideal for electrical and packaging applications",
     keywords: ["aluminum", "1100-O", "pure", "thin", "electrical", "packaging"],
-    availability: 120,
-    thickness_mm: 0.8,
-    total_weight_kg: 32.4
+    availability: 200,
+    thickness_mm: 0.5,
+    total_weight_kg: 3.75
   }
 ];
 
