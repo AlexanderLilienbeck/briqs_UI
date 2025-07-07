@@ -7,9 +7,23 @@
 
 ## Current Status
 
-**🎯 CURRENT PRIORITY: Negotiation Flow UX Fixes** 🚀
+**🎯 CURRENT PRIORITY: Products API Integration** 🚀
 
-**Major Milestone:** Color scheme implementation COMPLETE - Now fixing critical UX issues in negotiation flow
+**Major Task:** Integrate with external API to replace all existing product data with real industrial products
+
+**API Integration Details:**
+- **External API**: `localhost:8000/api/featuredProducts?buyer_id=1`
+- **MVP Approach**: Always use `buyer_id=1` for now
+- **Response Structure**: Nested arrays for excavators and aluminum sheets
+- **Development Challenge**: Cannot test API during development (no localhost:8000)
+- **Image Strategy**: Random assignment until API provides images
+
+**User Requirements:**
+- Complete removal of old B2C products (t-shirts, etc.)
+- Integration with real external API data
+- Graceful handling of API unavailability
+- Random assignment of existing product images
+- Heterogeneous attribute handling across different product types
 
 **🎯 COMPLETED: Dynamic Product Description System** ✅
 
@@ -66,8 +80,9 @@
 - [x] Phase 3.2: Dynamic Product Description System (Complete) ✅
 
 ## Active Implementation Plans
-- **CURRENT:** Negotiation Flow UX Fixes - Critical usability improvements
+- **CURRENT:** Products API Integration - Complete transformation to industrial products
 - ✅ **COMPLETED:** Dynamic Product Description System - Flexible descriptions for diverse product types
+- [Products API Integration](./implementation-plan/products-api-integration.md) - Complete product data transformation (NEW)
 - [Negotiation Flow Implementation](./implementation-plan/negotiation-flow-implementation.md) - Complete user experience for AI negotiations
 - [B2B AI Marketplace Core Platform](./implementation-plan/b2b-ai-marketplace-core.md) - Primary transformation plan (updated)
 - [Industrial Product Catalog Enhancement](./implementation-plan/industrial-product-catalog.md) - 20 industrial products with smart filters (COMPLETE)

@@ -1,0 +1,179 @@
+.api-status-banner {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    &.offline {
+      .status-icon {
+        font-size: 20px;
+      }
+
+      .status-text {
+        color: #856404;
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .api-errors {
+    .errors-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+
+      .error-icon {
+        font-size: 16px;
+      }
+
+      span {
+        color: #856404;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .clear-errors-btn {
+        background: none;
+        border: none;
+        color: #856404;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: auto;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: rgba(133, 100, 4, 0.1);
+        }
+      }
+    }
+
+    .errors-list {
+      .error-item {
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin-bottom: 4px;
+        border-left: 3px solid #ffc107;
+
+        .error-text {
+          color: #856404;
+          font-size: 13px;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+
+  // Success variant for when API comes back online
+  &.success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    border-color: #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+
+    .status-text,
+    .errors-header span,
+    .error-text {
+      color: #155724;
+    }
+
+    .clear-errors-btn {
+      color: #155724;
+
+      &:hover {
+        background-color: rgba(21, 87, 36, 0.1);
+      }
+    }
+
+    .error-item {
+      border-left-color: #28a745;
+    }
+  }
+
+  // Error variant for critical failures
+  &.error {
+    background: linear-gradient(135deg, #f8d7da, #f1b2b7);
+    border-color: #dc3545;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+
+    .status-text,
+    .errors-header span,
+    .error-text {
+      color: #721c24;
+    }
+
+    .clear-errors-btn {
+      color: #721c24;
+
+      &:hover {
+        background-color: rgba(114, 28, 36, 0.1);
+      }
+    }
+
+    .error-item {
+      border-left-color: #dc3545;
+    }
+  }
+}
+
+// Animation for when the banner appears
+.api-status-banner {
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .api-status-banner {
+    padding: 12px;
+    margin-bottom: 16px;
+
+    .status-indicator {
+      gap: 8px;
+      margin-bottom: 8px;
+
+      .status-text {
+        font-size: 13px;
+      }
+    }
+
+    .api-errors {
+      .errors-header {
+        gap: 6px;
+
+        span {
+          font-size: 13px;
+        }
+      }
+
+      .error-item {
+        padding: 6px 10px;
+
+        .error-text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+} 

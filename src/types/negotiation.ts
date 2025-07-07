@@ -368,6 +368,7 @@ export interface NegotiationData {
   requirements: ContractPosition[];
   negotiationId?: string;
   deals: NegotiationDeal[];
+  playbookData?: any; // API response data structure
 }
 
 export interface ContractPosition {
@@ -443,6 +444,24 @@ export interface NegotiationProgress {
   estimatedTimeRemaining: string;
   statusMessages: string[];
 }
+
+// API Response Types for the negotiation endpoint
+export interface DealReachedResponse {
+  status: "DEAL_REACHED";
+  price: string;
+  payment_terms: string;
+  warranty: string;
+  delivery: string;
+  maintenance_services?: string;
+  additional_terms?: string;
+}
+
+export interface NoDealReachedResponse {
+  status: "NO_DEAL_REACHED";
+  reason: string;
+}
+
+export type NegotiationResultApiResponse = DealReachedResponse | NoDealReachedResponse;
 
 // Static dummy data for development
 export const mockNegotiationResults: NegotiationDeal[] = [

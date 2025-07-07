@@ -1,9 +1,9 @@
 // import Swiper core and required components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import type { ProductTypeList } from "@/types";
+import type { UnifiedProduct } from "@/types/api-products";
 
-import ProductItem from "../../product-item";
+import ProductItem, { convertToProductItemProps } from "../../product-item";
 
 let slidesPerView = 1.3;
 let centeredSlides = true;
@@ -22,7 +22,7 @@ if (process.browser) {
 }
 
 type ProductsCarouselType = {
-  products: ProductTypeList[];
+  products: UnifiedProduct[];
 };
 
 const ProductsCarousel = ({ products }: ProductsCarouselType) => {
@@ -41,14 +41,8 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
         {products.map((item) => (
           <SwiperSlide key={item.id}>
             <ProductItem
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              color={item.color}
-              discount={item.discount}
-              currentPrice={item.currentPrice}
+              {...convertToProductItemProps(item)}
               key={item.id}
-              images={item.images}
             />
           </SwiperSlide>
         ))}
