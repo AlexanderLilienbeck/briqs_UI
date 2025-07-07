@@ -902,7 +902,7 @@ const NegotiationPage: React.FC = () => {
                 
                 {/* Display original user input */}
                 <div className="original-input-section">
-                  <h3>Original Request</h3>
+                  {/* <h3>Original Request</h3> */}
                   <div className="original-input-display">
                     {isPlaybookLoading ? (
                       <div className="skeleton-loading">
