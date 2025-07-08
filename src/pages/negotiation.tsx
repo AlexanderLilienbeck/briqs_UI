@@ -754,6 +754,50 @@ const NegotiationPage: React.FC = () => {
                   <h2>Tell us what product you are looking for</h2>
                   <p>Describe the product you need, your price range, important terms, and where you could make compromises.</p>
                   
+                  <div className="mvp-voice-banner" style={{
+                    background: 'linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%)',
+                    border: '2px solid #ffc107',
+                    borderRadius: '12px',
+                    marginBottom: '30px',
+                    boxShadow: '0 4px 12px rgba(255, 193, 7, 0.2)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '6px',
+                      height: '100%',
+                      background: '#f39c12'
+                    }}></div>
+                    <div className="banner-content" style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '15px',
+                      padding: '20px 20px 20px 30px'
+                    }}>
+                      <span className="banner-icon" style={{
+                        fontSize: '24px',
+                        lineHeight: 1,
+                        flexShrink: 0,
+                        marginTop: '2px'
+                      }}>⚠️</span>
+                      <div className="banner-text" style={{
+                        fontSize: '15px',
+                        lineHeight: 1.6,
+                        color: '#856404'
+                      }}>
+                        <strong style={{
+                          fontWeight: 700,
+                          color: '#533102',
+                          fontSize: '16px'
+                        }}>MVP Note:</strong> Voice input currently only supports excavator products. 
+                        Try saying: "I want an excavator <b><u>from the brand excavator</u></b>, maximum price 170,000 €, no upfront payments"
+                      </div>
+                    </div>
+                  </div>
+                  
                   <div className="voice-controls">
                     <div className="voice-recording-container">
                       <motion.button
