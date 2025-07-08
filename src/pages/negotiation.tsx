@@ -582,6 +582,7 @@ const NegotiationPage: React.FC = () => {
       return mockResult;
     }
   };
+  
 
   // Start AI negotiation simulation
   const startNegotiation = () => {
