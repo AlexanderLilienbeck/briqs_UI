@@ -461,7 +461,12 @@ export interface NoDealReachedResponse {
   reason: string;
 }
 
-export type NegotiationResultApiResponse = DealReachedResponse | NoDealReachedResponse;
+export interface ContinueNegotiationResponse {
+  status: "CONTINUE";
+  reason: string;
+}
+
+export type NegotiationResultApiResponse = DealReachedResponse | NoDealReachedResponse | ContinueNegotiationResponse;
 
 // Static dummy data for development
 export const mockNegotiationResults: NegotiationDeal[] = [

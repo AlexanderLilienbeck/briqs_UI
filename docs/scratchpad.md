@@ -12,10 +12,10 @@
 **Major Task:** Integrate with external API to replace all existing product data with real industrial products
 
 **API Integration Details:**
-- **External API**: `localhost:8000/api/featuredProducts?buyer_id=1`
+- **External API**: `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
 - **MVP Approach**: Always use `buyer_id=1` for now
 - **Response Structure**: Nested arrays for excavators and aluminum sheets
-- **Development Challenge**: Cannot test API during development (no localhost:8000)
+- **Development Challenge**: Cannot test API during development (no web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com)
 - **Image Strategy**: Random assignment until API provides images
 
 **User Requirements:**

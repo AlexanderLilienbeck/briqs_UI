@@ -6,7 +6,7 @@
 import { FeaturedProductsResponse, UnifiedProduct, transformAPIResponse } from '../types/api-products';
 
 // External API configuration
-const EXTERNAL_API_BASE_URL = 'http://localhost:8000';
+const EXTERNAL_API_BASE_URL = 'https://web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com';
 const BUYER_ID = 1; // MVP: Always use buyer_id=1
 
 // Import the image utility function

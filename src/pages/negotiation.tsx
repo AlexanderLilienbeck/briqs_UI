@@ -13,7 +13,10 @@ import {
   negotiationSteps,
   ContractPosition,
   NegotiationDeal,
-  NegotiationResultApiResponse
+  NegotiationResultApiResponse,
+  DealReachedResponse,
+  NoDealReachedResponse,
+  ContinueNegotiationResponse
 } from "@/types/negotiation";
 import { MockTranscriptionService } from "@/utils/mock-transcription-service";
 
@@ -291,10 +294,10 @@ const NegotiationPage: React.FC = () => {
       
       // Set a timeout for the API call
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('API timeout')), 10000)
+        setTimeout(() => reject(new Error('API timeout')), 60000) // Increased to 60 seconds for transcription API
       );
       
-      const apiPromise = fetch('http://localhost:8000/api/transcribe', {
+      const apiPromise = fetch('https://web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/transcribe', {
         method: 'POST',
         body: formData,
       });
@@ -502,6 +505,84 @@ const NegotiationPage: React.FC = () => {
     }
   };
 
+  // API call function (separated from progress simulation)
+  const callNegotiationAPI = async (): Promise<NegotiationResultApiResponse> => {
+    try {
+      console.log('🤖 Starting API negotiation...');
+      
+      // Get the text input for the API call
+      const textInput = negotiationData.voiceInput || negotiationData.textInput || '';
+      
+      if (!textInput.trim()) {
+        throw new Error('No text input available for negotiation');
+      }
+      
+      console.log('📤 Sending negotiation request:', {
+        text_input: textInput.substring(0, 100) + '...', // Log truncated version for privacy
+        buyer_id: 1
+      });
+      
+      // Make the actual API call to the negotiation service with timeout
+      const timeoutController = new AbortController();
+      const timeoutId = setTimeout(() => timeoutController.abort(), 120000); // 2 minute timeout for negotiation API
+      
+      const negotiationResponse = await fetch('https://web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/negotiate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text_input: textInput,
+          buyer_id: 1
+        }),
+        signal: timeoutController.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!negotiationResponse.ok) {
+        const errorText = await negotiationResponse.text();
+        throw new Error(`Negotiation API error: ${negotiationResponse.status} ${negotiationResponse.statusText}. Response: ${errorText}`);
+      }
+      
+      const apiResult: NegotiationResultApiResponse = await negotiationResponse.json();
+      console.log('✅ API negotiation call successful:', apiResult);
+      
+      // Validate the API response structure
+      if (!apiResult.status) {
+        throw new Error('Invalid API response: missing status field');
+      }
+      
+      if (apiResult.status === 'DEAL_REACHED') {
+        const dealResult = apiResult as DealReachedResponse;
+        if (!dealResult.price || !dealResult.payment_terms || !dealResult.warranty || !dealResult.delivery) {
+          throw new Error('Invalid DEAL_REACHED response: missing required fields');
+        }
+      } else {
+        // Treat any non-DEAL_REACHED status as NO_DEAL_REACHED
+        // This includes NO_DEAL_REACHED, CONTINUE, or any unknown status
+        console.log(`📝 API returned status: "${apiResult.status}" - treating as NO_DEAL_REACHED`);
+        
+        // Try to extract reason from the response, regardless of the exact status
+        const reason = (apiResult as any).reason;
+        if (!reason) {
+          console.warn('⚠️ No reason field found in non-deal response, using default message');
+          // Add a default reason if none provided
+          (apiResult as any).reason = `Negotiation status: ${apiResult.status}. No additional details provided.`;
+        }
+      }
+      
+      return apiResult;
+      
+    } catch (apiError) {
+      console.warn('⚠️ Negotiation API failed, using mock data:', apiError);
+      
+      // Fallback to mock service for negotiation results
+      const mockResult = MockTranscriptionService.getRandomNegotiationResult();
+      return mockResult;
+    }
+  };
+
   // Start AI negotiation simulation
   const startNegotiation = () => {
     setIsNegotiating(true);
@@ -511,21 +592,36 @@ const NegotiationPage: React.FC = () => {
       requirements: mockContractPositions 
     }));
     
-    // Simulate negotiation progress
+    // Start API call immediately and progress simulation in parallel
     simulateNegotiationProgress();
   };
 
   const simulateNegotiationProgress = () => {
     const steps = [
-      { step: "Analyzing requirements...", progress: 10, suppliers: 0 },
+      { step: "Analyzing requirements...", progress: 8, suppliers: 0 },
+      { step: "Searching marketplace...", progress: 15, suppliers: 5 },
       { step: "Contacting suppliers...", progress: 25, suppliers: 15 },
-      { step: "Receiving initial offers...", progress: 40, suppliers: 15 },
-      { step: "AI agents negotiating terms...", progress: 60, suppliers: 15 },
-      { step: "Finalizing best deals...", progress: 80, suppliers: 15 },
+      { step: "Receiving initial offers...", progress: 35, suppliers: 15 },
+      { step: "AI agents evaluating offers...", progress: 45, suppliers: 15 },
+      { step: "Negotiating pricing terms...", progress: 55, suppliers: 15 },
+      { step: "Negotiating delivery terms...", progress: 65, suppliers: 15 },
+      { step: "Negotiating payment terms...", progress: 75, suppliers: 15 },
+      { step: "Finalizing best deals...", progress: 85, suppliers: 15 },
+      { step: "Reviewing contract terms...", progress: 95, suppliers: 15 },
       { step: "Negotiation complete!", progress: 100, suppliers: 15 }
     ];
     
     let currentStepIndex = 0;
+    let apiCallCompleted = false;
+    let apiResult: NegotiationResultApiResponse | null = null;
+    
+    // Start the API call immediately when negotiation begins
+    const apiPromise = callNegotiationAPI().then(result => {
+      apiResult = result;
+      apiCallCompleted = true;
+      console.log('🔄 API call completed, waiting for progress animation...');
+      return result;
+    });
     
     const interval = setInterval(async () => {
       if (currentStepIndex < steps.length) {
@@ -545,42 +641,34 @@ const NegotiationPage: React.FC = () => {
         clearInterval(interval);
         setIsNegotiating(false);
         
-        // Try to get negotiation result from API, with fallback to mock data
-        try {
-          console.log('🤖 Attempting API negotiation...');
+        // Wait for API call to complete if it hasn't already
+        if (!apiCallCompleted) {
+          console.log('⏳ Progress complete, waiting for API result...');
+          setProgressState(prev => ({
+            ...prev,
+            currentStep: "Waiting for negotiation result...",
+            progress: 100
+          }));
           
-          // Here you would make an actual API call to your negotiation service
-          // For now, we'll simulate the API call and always fallback to mock
-          
-          // Simulate API call with timeout
-          const mockApiCall = new Promise((resolve, reject) => {
-            setTimeout(() => {
-              // Simulate random API failures for demonstration
-              if (Math.random() > 0.8) { // 20% API failure rate
-                reject(new Error('Negotiation API temporarily unavailable'));
-              } else {
-                resolve({ success: true });
-              }
-            }, 1000);
-          });
-          
-          await mockApiCall;
-          console.log('✅ API negotiation call successful, but using mock result for MVP');
-          
-        } catch (apiError) {
-          console.warn('⚠️ Negotiation API failed, using mock data:', apiError);
+          try {
+            apiResult = await apiPromise;
+          } catch (error) {
+            console.error('❌ Error waiting for API result:', error);
+            apiResult = MockTranscriptionService.getRandomNegotiationResult();
+          }
         }
         
-        // Use mock service for negotiation results (with enhanced variety)
-        const mockResult = MockTranscriptionService.getRandomNegotiationResult();
-        setNegotiationResult(mockResult);
+        // Set the final result and move to step 5
+        if (apiResult) {
+          setNegotiationResult(apiResult);
+        }
         
         setNegotiationData(prev => ({ 
           ...prev, 
           step: 5
         }));
       }
-    }, 2000);
+    }, 4000); // Increased from 2s to 4s per step for longer loading experience
   };
 
   // Deal approval
@@ -1232,22 +1320,41 @@ const NegotiationPage: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  // No Deal Reached Scenario
+                  // Any non-DEAL_REACHED scenario (NO_DEAL_REACHED, CONTINUE, or unknown status)
                   <div className="no-deal-content">
                     <div className="result-header failure">
-                      <h2>No Deal Reached</h2>
-                      <p>We were not able to settle a deal for a product with your specs along with your preferred contract terms.</p>
+                      <h2>
+                        {negotiationResult.status === "CONTINUE" ? "Negotiation Continues" : 
+                         negotiationResult.status === "NO_DEAL_REACHED" ? "No Deal Reached" : 
+                         "Negotiation Update"}
+                      </h2>
+                      <p>
+                        {negotiationResult.status === "CONTINUE" 
+                          ? "The negotiation is ongoing. Here's what's happening with your request."
+                          : negotiationResult.status === "NO_DEAL_REACHED"
+                          ? "We were not able to settle a deal for a product with your specs along with your preferred contract terms."
+                          : "Here's the latest update on your negotiation request."
+                        }
+                      </p>
                     </div>
                     
                     <div className="no-deal-details-card">
                       <div className="details-header">
                         <h3>What Happened?</h3>
-                        <div className="deal-status-badge failure">No Deal</div>
+                        <div className={`deal-status-badge ${negotiationResult.status === "CONTINUE" ? "continue" : "failure"}`}>
+                          {negotiationResult.status === "CONTINUE" ? "In Progress" : 
+                           negotiationResult.status === "NO_DEAL_REACHED" ? "No Deal" : 
+                           "Status Update"}
+                        </div>
                       </div>
                       
                       <div className="failure-reason">
                         <div className="reason-content">
-                          <h4>Negotiation Breakdown</h4>
+                          <h4>
+                            {negotiationResult.status === "CONTINUE" ? "Current Status" : 
+                             negotiationResult.status === "NO_DEAL_REACHED" ? "Negotiation Breakdown" : 
+                             "Details"}
+                          </h4>
                           <p>{negotiationResult.reason}</p>
                         </div>
                       </div>

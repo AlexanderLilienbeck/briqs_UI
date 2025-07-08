@@ -2,10 +2,10 @@
 
 ## Background and Motivation
 
-The current system uses legacy B2C product data (t-shirts, etc.) which needs to be completely replaced with industrial products from an external API. The system will integrate with `localhost:8000/api/featuredProducts?buyer_id=1` to fetch real Excavator and AluminumSheet products, transforming the marketplace to focus purely on industrial products.
+The current system uses legacy B2C product data (t-shirts, etc.) which needs to be completely replaced with industrial products from an external API. The system will integrate with `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1` to fetch real Excavator and AluminumSheet products, transforming the marketplace to focus purely on industrial products.
 
 **Key Requirements:**
-- Integration with external API: `localhost:8000/api/featuredProducts?buyer_id=1`
+- Integration with external API: `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
 - Complete removal of old B2C product data
 - Handle API response structure with nested product arrays
 - MVP approach: Always use `buyer_id=1`
@@ -33,7 +33,7 @@ The current system uses legacy B2C product data (t-shirts, etc.) which needs to 
 ## Key Challenges and Analysis
 
 ### 1. **External API Integration**
-- **Challenge**: Integration with external API at `localhost:8000/api/featuredProducts?buyer_id=1`
+- **Challenge**: Integration with external API at `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
 - **Impact**: Need robust error handling for API unavailability during development
 - **Solution**: Implement graceful fallback and proper error states
 
@@ -63,7 +63,7 @@ The current system uses legacy B2C product data (t-shirts, etc.) which needs to 
 **Goal**: Replace all product data with industrial products matching Pydantic schema
 
 #### Task 1.1: External API Integration Setup
-- [ ] Create API service to fetch from `localhost:8000/api/featuredProducts?buyer_id=1`
+- [ ] Create API service to fetch from `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
 - [ ] Implement error handling for API unavailability
 - [ ] Add response caching mechanism
 - [ ] Create image assignment utility for products without images
@@ -167,7 +167,7 @@ The current system uses legacy B2C product data (t-shirts, etc.) which needs to 
 
 ### ✅ COMPLETED TASKS
 - [x] **Task 1.1: External API Integration Setup**
-  - ✅ Create API service to fetch from `localhost:8000/api/featuredProducts?buyer_id=1`
+  - ✅ Create API service to fetch from `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
   - ✅ Implement error handling for API unavailability
   - ✅ Add response caching mechanism
   - ✅ Create image assignment utility for products without images
@@ -309,7 +309,7 @@ interface AluminumSheet extends BaseProduct {
 ```
 
 ### API Integration Strategy
-- **External API**: `localhost:8000/api/featuredProducts?buyer_id=1`
+- **External API**: `web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1`
 - **Fallback Handling**: Graceful degradation when API unavailable
 - **Image Assignment**: Random assignment utility for existing images
 - **Caching**: Consider API response caching for performance
@@ -318,7 +318,7 @@ interface AluminumSheet extends BaseProduct {
 ### API Response Format
 ```typescript
 // External API call
-GET localhost:8000/api/featuredProducts?buyer_id=1
+GET web-u7lq49qv2x24.up-de-fra1-k8s-1.apps.run-on-seenode.com/api/featuredProducts?buyer_id=1
 Response: FeaturedProductsResponse
 
 // Internal API endpoints (transformed)
