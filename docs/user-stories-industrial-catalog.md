@@ -7,6 +7,7 @@
 
 ## User Personas
 
+
 ### Primary Personas
 - **Industrial Procurement Manager (IPM)**: Experienced buyer of industrial materials and equipment
 - **Supplier Sales Manager (SSM)**: Manages industrial product sales and customer relationships  
