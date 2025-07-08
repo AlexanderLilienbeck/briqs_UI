@@ -79,7 +79,7 @@ const Footer = () => {
             <ul>
               <li>Contact</li>
               <li>
-                <a href="#">support@mail.info</a>
+                <a href="mailto:hello.briqs@gmail.com">hello.briqs@gmail.com</a>
               </li>
               <li>
                 <a href="#">Phone: +49 123 456789</a>
@@ -91,7 +91,7 @@ const Footer = () => {
 
       <div className="site-footer__bottom">
         <div className="container">
-          <p>Raise the Hack Project- Team Lexploits - Prosus Track - © 2025. ALL RIGHTS RESERVED.</p>
+          <p>Team Lexploits - Prosus Track | Raise the Hack Project | hello.briq@gmail.com</p>
         </div>
       </div>
     </footer>
